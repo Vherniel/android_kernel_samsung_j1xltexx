@@ -1,0 +1,21 @@
+#! /bin/bash
+
+# Clean the working directory first
+echo "Cleaning the directory..."
+make clean
+make mrproper
+echo "Done!"
+
+# Start kernel compilation
+echo "Initializing defconfig configuration..."
+make j1xlte_02_defconfig
+echo "Done!"
+echo "Compilation started..."
+make all -j 6
+echo "Done!"
+
+# Copy files to output folder
+echo "Copying files to output folder..."
+cp arch/arm/boot/zImage ../Output/zImage
+cp arch/arm/boot/zImage-dtb ../Output/zImage-dtb
+echo "Done!"
